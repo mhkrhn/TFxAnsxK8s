@@ -2,6 +2,6 @@ variable "location" {
    type = string
 }
 
-variable "instance_size" {
+variable "size" {
    type = string
 }
