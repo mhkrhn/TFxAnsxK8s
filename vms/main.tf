@@ -68,12 +68,19 @@ resource "azurerm_network_interface" "kbnic" {
   }
 }
 
-#resource "azurerm_ssh_public_key" "sshctl" {
-  #name                = "example"
-  #resource_group_name = "example"
-  #location            = "West Europe"
-  #public_key          = file("~/.ssh/id_rsa_ctl.pub")
-#}
+resource "azurerm_ssh_public_key" "sshctl" {
+  name                = "sshcontrol"
+  resource_group_name = azurerm_resource_group.kube.name
+  location            = "West Europe"
+  public_key          = file("~/.ssh/id_rsa_ctl.pub")
+}
+
+resource "azurerm_ssh_public_key" "sshwk" {
+  name                = "sshwks"
+  resource_group_name = azurerm_resource_group.kube.name
+  location            = "West Europe"
+  public_key          = file("~/.ssh/id_rsa_wks.pub")
+}
 
 resource "azurerm_linux_virtual_machine" "ctlplane" {
   name                = "master.kubernetes.lab"
@@ -87,7 +94,7 @@ resource "azurerm_linux_virtual_machine" "ctlplane" {
     azurerm_network_interface.kbnic.id,
   ]
 
-admin_ssh_key {
+  admin_ssh_key {
   username   = "azureuser"
   public_key = file("~/.ssh/id_rsa_ctl.pub")
 }
@@ -155,9 +162,7 @@ resource "azurerm_network_interface" "kwk" {
    location              = azurerm_resource_group.kube.location
    availability_set_id   = azurerm_availability_set.avset.id
    resource_group_name   = azurerm_resource_group.kube.name
-   disable_password_authentication = false
    admin_username        = "azureuser"
-   admin_password        = "@Azurev69007"
    network_interface_ids = [element(azurerm_network_interface.kwk.*.id, count.index)]
    size               = "Standard_D2ds_v4"
 
