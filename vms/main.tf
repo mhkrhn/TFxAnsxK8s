@@ -68,18 +68,14 @@ resource "azurerm_network_interface" "kbnic" {
   }
 }
 
-resource "azurerm_ssh_public_key" "sshctl" {
-  name                = "sshcontrol"
-  resource_group_name = azurerm_resource_group.kube.name
-  location            = "West Europe"
-  public_key          = file("~/.ssh/id_rsa_ctl.pub")
+resource "tls_private_key" "sshctl" {
+    algorithm = "RSA"
+    rsa_bits = 4096
 }
 
-resource "azurerm_ssh_public_key" "sshwk" {
-  name                = "sshwks"
-  resource_group_name = azurerm_resource_group.kube.name
-  location            = "West Europe"
-  public_key          = file("~/.ssh/id_rsa_wks.pub")
+resource "tls_private_key" "sshwks" {
+    algorithm = "RSA"
+    rsa_bits = 4096
 }
 
 resource "azurerm_linux_virtual_machine" "ctlplane" {
@@ -96,7 +92,7 @@ resource "azurerm_linux_virtual_machine" "ctlplane" {
 
   admin_ssh_key {
   username   = "azureuser"
-  public_key = file("~/.ssh/id_rsa_ctl.pub")
+  public_key = tls_private_key.sshctl
 }
 
   os_disk {
@@ -186,8 +182,13 @@ os_disk {
 
 admin_ssh_key {
   username   = "azureuser"
-  public_key = file("~/.ssh/id_rsa_wks.pub")
+  public_key = tls_private_key.sshwks
 }
+
+   tags = {
+     role = "Workers"
+   }
+ }
 
    tags = {
      role = "Workers"
