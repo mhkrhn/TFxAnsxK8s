@@ -15,6 +15,5 @@ provider "azurerm" {
 
 module "vms" {
     source = "github.com/Nevralgie/TFxAnsxK8s/vms"
-    
 }
 
