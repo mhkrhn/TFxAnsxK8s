@@ -92,7 +92,7 @@ resource "azurerm_linux_virtual_machine" "ctlplane" {
 
   admin_ssh_key {
   username   = "azureuser"
-  public_key = tls_private_key.sshctl
+  public_key = tls_private_key.sshctl.public_key_openssh
 }
 
   os_disk {
@@ -182,7 +182,7 @@ os_disk {
 
 admin_ssh_key {
   username   = "azureuser"
-  public_key = tls_private_key.sshwks
+  public_key = tls_private_key.sshwks.public_key_openssh
 }
 
    tags = {
