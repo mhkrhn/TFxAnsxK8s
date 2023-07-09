@@ -189,8 +189,3 @@ admin_ssh_key {
      role = "Workers"
    }
  }
-
-   tags = {
-     role = "Workers"
-   }
- }
