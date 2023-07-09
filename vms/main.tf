@@ -24,30 +24,53 @@ resource "azurerm_network_security_group" "kube" {
   resource_group_name = azurerm_resource_group.kube.name
 
   security_rule {
-    name                       = "ssh"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
+       name = "http"
+       priority = 100
+       direction = "Inbound"
+       access = "Allow"
+       protocol = "Tcp"
+       source_port_range = "*"
+       destination_port_range = "80"
+       source_address_prefix = "*"
+       destination_address_prefix = "*"
+   }
 
-  security_rule {
-    name                       = "Vnallow"
-    priority                   = 200
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "VirtualNetwork"
-  }
+   security_rule {
+       name = "https"
+       priority = 200
+       direction = "Inbound"
+       access = "Allow"
+       protocol = "Tcp"
+       source_port_range = "*"
+       destination_port_range = "443"
+       source_address_prefix = "*"
+       destination_address_prefix = "*"
+   }
+
+   security_rule {
+       name = "ssh"
+       priority = 300
+       direction = "Inbound"
+       access = "Allow"
+       protocol = "Tcp"
+       source_port_range = "*"
+       destination_port_range = "22"
+       source_address_prefix = "*"
+       destination_address_prefix = "*"
+   }
+
+   security_rule {
+       name = "all"
+       priority = 400
+       direction = "Inbound"
+       access = "Allow"
+       protocol = "*"
+       source_port_range = "*"
+       destination_port_range = "*"
+       source_address_prefix = "VirtualNetwork"
+       destination_address_prefix = "VirtualNetwork"
+   }
 }
-
 resource "azurerm_public_ip" "masterip" {
    name = "ctlpubip"
    location = azurerm_resource_group.kube.location
