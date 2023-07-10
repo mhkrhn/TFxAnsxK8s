@@ -26,22 +26,22 @@ output "Worker2_private_Ip" {
   value = module.vms.The_webserver_Private_ip_worker2
 }
 
-output "pub_keyctl" {
-  value     = module.vms.pub
+output "pubkeyctl" {
+  value     = module.vms.pubsshctl
   sensitive = true
 }
 
 output "private_keyctl" {
-    value   = module.vms.private
+    value   = module.vms.pvtsshctl
     sensitive = true
 }
 
 output "pub_keywks" {
-  value     = module.vms.pub
+  value     = module.vms.pubwks
   sensitive = true
 }
 
 output "private_keywks" {
-    value   = module.vms.private
+    value   = module.vms.privatewks
     sensitive = true
 }
