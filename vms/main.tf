@@ -123,13 +123,12 @@ resource "azurerm_linux_virtual_machine" "ctlplane" {
     storage_account_type = "Standard_LRS"
   }
 
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-gen2"
-    version   = "latest"
+ source_image_reference {
+    publisher = "tidalmediainc"
+    offer     = "grafana-centos-8"
+    sku       = "grafana-centos-8"
+    version   = "1.0.0"
   }
-
   tags = {
      role = "master.kubernetes.lab"
    }
@@ -197,10 +196,10 @@ os_disk {
   }
 
   source_image_reference {
-    publisher = "procomputers"
-    offer     = "centos-8"
-    sku       = "centos-8"
-    version   = "latest"
+    publisher = "tidalmediainc"
+    offer     = "grafana-centos-8"
+    sku       = "grafana-centos-8"
+    version   = "1.0.0"
   }
 
 admin_ssh_key {
