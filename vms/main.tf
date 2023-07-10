@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "kube" {
-  name     = "kube-cluster-Tom"
+  name     = "kube-cluster-Tom1"
   location = "francecentral"
 }
 
