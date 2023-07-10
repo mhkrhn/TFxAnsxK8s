@@ -197,9 +197,9 @@ os_disk {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts-gen2"
+    publisher = "procomputers"
+    offer     = "centos-8"
+    sku       = "centos-8"
     version   = "latest"
   }
 
