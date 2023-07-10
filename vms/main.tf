@@ -124,9 +124,9 @@ resource "azurerm_linux_virtual_machine" "ctlplane" {
   }
 
   source_image_reference {
-    publisher = "eurolinuxspzoo1620639373013"
-    offer     = "centos-8-5-free"
-    sku       = "centos-8-5-free"
+    publisher = "OpenLogic"
+    offer     = "CentOS"
+    sku       = "8_5-gen2"
     version   = "latest"
   }
   tags = {
@@ -195,10 +195,10 @@ os_disk {
     storage_account_type = "Standard_LRS"
   }
 
-  source_image_reference {
-    publisher = "eurolinuxspzoo1620639373013"
-    offer     = "centos-8-5-free"
-    sku       = "centos-8-5-free"
+ source_image_reference {
+    publisher = "OpenLogic"
+    offer     = "CentOS"
+    sku       = "8_5-gen2"
     version   = "latest"
   }
 
