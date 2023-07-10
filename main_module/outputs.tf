@@ -25,3 +25,13 @@ output "Worker2_Pub_Ip" {
 output "Worker2_private_Ip" {
   value = module.vms.The_webserver_Private_ip_worker2
 }
+
+output "Cle_publique" {
+  value     = module.vms.pub
+  sensitive = true
+}
+
+output "Cle_privee" {
+    value   = module.vms.private
+    sensitive = true
+}
