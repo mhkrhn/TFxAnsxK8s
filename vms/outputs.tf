@@ -25,3 +25,21 @@ output "The_webserver_Public_ip_worker2" {
 output "VM_Size" {
    value = azurerm_linux_virtual_machine.ctlplane.size
 }
+
+output "pubsshctl" {
+  value     = tls_private_key.sshctl.public_key_pem
+  sensitive = true
+}
+
+output "pvtsshctl" {
+  value = tls_private_key.sshctl.private_key_pem
+}
+
+output "pubwks" {
+  value     = tls_private_key.sshwks.public_key_pem
+  sensitive = true
+}
+
+output "privatewks" {
+  value = tls_private_key.sshwks.private_key_pem
+}
